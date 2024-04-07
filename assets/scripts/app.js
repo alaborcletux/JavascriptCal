@@ -33,54 +33,54 @@ function usingObjectToGetUserInput(operator, prevResuit, number, result) {
      console.log(longEntries);
 }
 
-function add() {
+function calculateResult(calculatorTypes) {
      const enterNumber = getUserNumberInput();
      const initialResult = currentResult;
-     currentResult = currentResult + enterNumber;
-     createAndWriteOutput("+", initialResult, enterNumber);
+     let mathOperator;
+
+     if (calculatorTypes === "ADD") {
+          currentResult = currentResult + enterNumber;
+          mathOperator = "+";
+     } else if (calculatorTypes === "SUBTRACT") {
+          currentResult -= enterNumber;``
+          mathOperator = "-";
+     } else if (calculatorTypes === "MULTIPLY") {
+          currentResult *= enterNumber;
+          mathOperator = "*";
+     } else {
+          currentResult /= enterNumber;
+          mathOperator = "/";
+     }
+
+     if (
+          calculatorTypes !== "ADD" &&
+          calculatorTypes !== "SUBTRACT" &&
+          calculatorTypes !== "MULTIPLY" &&
+          calculatorTypes !== "DIVIDE"
+     ) {
+          return;
+     }
+     createAndWriteOutput(mathOperator, initialResult, enterNumber);
      usingObjectToGetUserInput(
-          "ADD",
+          calculatorTypes,
           currentResult,
           initialResult,
           enterNumber
      );
 }
 
+function add() {
+     calculateResult("ADD");
+}
+
 function subtract() {
-     const enterNumber = getUserNumberInput();
-     const initialResult = currentResult;
-     currentResult = currentResult - enterNumber;
-     createAndWriteOutput("-", initialResult, enterNumber);
-     usingObjectToGetUserInput(
-          "SUBTRACT",
-          currentResult,
-          initialResult,
-          enterNumber
-     );
+     calculateResult("SUBTRACT");
 }
 function multiply() {
-     const enterNumber = getUserNumberInput();
-     const initialResult = currentResult;
-     currentResult = currentResult * enterNumber;
-     createAndWriteOutput("*", initialResult, enterNumber);
-     usingObjectToGetUserInput(
-          "MULTIPLY",
-          currentResult,
-          initialResult,
-          enterNumber
-     );
+     calculateResult("MULTIPLY");
 }
 function divide() {
-     const enterNumber = getUserNumberInput();
-     const initialResult = currentResult;
-     currentResult = currentResult / enterNumber;
-     createAndWriteOutput("/", initialResult, enterNumber);
-     usingObjectToGetUserInput(
-          "DIVIDE",
-          currentResult,
-          initialResult,
-          enterNumber
-     );
+     calculateResult("DIVIDE");
 }
 
 addBtn.addEventListener("click", add);
